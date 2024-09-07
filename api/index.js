@@ -9,8 +9,8 @@ const app = Fastify({
 app.get('/', async (req, reply) => {
     const randomCard = PrimaryCards[Math.floor(Math.random() * PrimaryCards.length)]
     const pictureNumber = Math.floor(randomCard.id / 8) + 1
-    const pictureIndex = randomCard.id % 8
-    return reply.status(200).send({...randomCard, pictureNumber, pictureIndex})
+    const pictureOneIndex = randomCard.id % 8
+    return reply.status(200).send({...randomCard, pictureNumber, pictureOneIndex})
 })
 
 // app.get('/card-image/:id', async (req, reply) => {
