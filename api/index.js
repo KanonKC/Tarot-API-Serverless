@@ -32,7 +32,7 @@ app.get('/', async (req, reply) => {
         secondaryName: randomSecondaryCard.name,
         secondaryDescription: randomSecondaryCard.description,
         secondaryPictureNumber: Math.floor((randomSecondaryCard.id - 22) / 8) + 4,
-        secondaryPictureOneIndex: ((randomSecondaryCard.id - 23) % 8) + 1,
+        secondaryPictureOneIndex: ((randomSecondaryCard.id - 22) % 8) + 1,
     }
 
     return reply.status(200).send({ ...randomCard, pictureNumber, pictureOneIndex, ...secondaryBody })
