@@ -46,6 +46,7 @@ app.get('/queue/dequeue', async (req, reply) => {
 
     return reply.status(200).send({
         current: dequeued,
+        queueDisplayText: queueList.join("/"),
         queueText: queueList === "%line0%" ? "" : queueList.join(delimeter),
         total: queueList.length
     })
@@ -63,6 +64,7 @@ app.get('/queue/add', async (req, reply) => {
 
     return reply.status(200).send({
         queueText: queueList.join(delimeter),
+        queueDisplayText: queueList.join("/"),
         total: queueList.length
     })
 })
