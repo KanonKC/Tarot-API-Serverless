@@ -53,8 +53,12 @@ app.get('/queue/dequeue', async (req, reply) => {
 app.get('/queue/add', async (req, reply) => {
 
     const { queue, delimeter, item } = req.query
-
-    const queueList = queue.split(delimeter)
+    let queueList = []
+    if (queue === "%line0%") {
+        queueList = []
+    } else {
+        queueList = queue.split(delimeter)
+    }
     queueList.push(item)
 
     return reply.status(200).send({
