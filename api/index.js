@@ -3,9 +3,7 @@ import { PrimaryCards } from './data/PrimaryCard'
 import { readFile } from 'fs'
 import { SecondaryCards } from './data/SecondaryCard'
 
-const app = Fastify({
-    logger: true,
-})
+const app = Fastify()
 
 function getPictureNumberAndIndex(id, diffIdStart, diffIdEnd, pictureNumberOffset) {
     let picturePosition = id
@@ -36,6 +34,33 @@ app.get('/', async (req, reply) => {
     }
 
     return reply.status(200).send({ ...randomCard, pictureNumber, pictureOneIndex, ...secondaryBody })
+})
+
+app.get('/queue/dequeue', async (req, reply) => {
+
+    const { queue, delimeter } = req.query
+
+    const queueList = queue.split(delimeter)
+
+    const dequeued = queueList.shift()
+
+    return reply.status(200).send({
+        current: dequeued,
+        queueText: queueList.join(delimeter),
+        total: queueList.length
+    })
+})
+app.get('/queue/add', async (req, reply) => {
+
+    const { queue, delimeter, item } = req.query
+
+    const queueList = queue.split(delimeter)
+    queueList.push(item)
+
+    return reply.status(200).send({
+        queueText: queueList.join(delimeter),
+        total: queueList.length
+    })
 })
 
 // app.get('/card-image/:id', async (req, reply) => {
