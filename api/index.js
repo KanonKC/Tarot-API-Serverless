@@ -46,7 +46,7 @@ app.get('/queue/dequeue', async (req, reply) => {
 
     return reply.status(200).send({
         current: dequeued,
-        queueText: queueList.join(delimeter),
+        queueText: queueList === "%line0%" ? "" : queueList.join(delimeter),
         total: queueList.length
     })
 })
